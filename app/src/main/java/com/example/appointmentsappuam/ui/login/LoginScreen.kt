@@ -2,7 +2,9 @@ package com.example.appointmentsappuam.ui.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.LocalTextStyle
@@ -16,6 +18,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,11 +37,11 @@ fun LoginScreen() {
         verticalArrangement = Arrangement.Center,
         modifier = Modifier.fillMaxSize().padding(16.dp)
     ) {
-        val logoPainter: Painter = painterResource(id = R.drawable.ic_launcher_background) // Replace with your logo resource
+
         Image(
-            painter = logoPainter,
+            painter = painterResource(id = R.drawable.logo),
             contentDescription = "Logo",
-            modifier = Modifier.size(100.dp) // Adjust size as needed
+//            modifier = Modifier.size(100.dp)
         )
 
         Spacer(modifier = Modifier.height(32.dp))
@@ -54,7 +58,11 @@ fun LoginScreen() {
             value = email,
             onValueChange = { email = it },
             label = { Text("CIF") },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(10.dp),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Number
+            )
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -64,7 +72,11 @@ fun LoginScreen() {
             onValueChange = { password = it },
             label = { Text("Contraseña") },
             modifier = Modifier.fillMaxWidth(),
-            visualTransformation = PasswordVisualTransformation()
+            visualTransformation = PasswordVisualTransformation(),
+            shape = RoundedCornerShape(10.dp),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Text
+            )
         )
 
         Spacer(modifier = Modifier.height(16.dp))
