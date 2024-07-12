@@ -11,10 +11,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 
-@Preview(showBackground = true)
+
 @Composable
-fun ScheduleMeetingScreen() {
+fun ScheduleMeetingScreen(navController: NavHostController) {
     var professorName by remember { mutableStateOf("") }
     var isOnline by remember { mutableStateOf(true) }
     var location by remember { mutableStateOf("") }

@@ -1,3 +1,5 @@
+package com.example.appointmentsappuam.ui.profile
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -14,11 +16,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
 
-@Preview
+
 @Composable
-fun UserProfileScreen() {
+fun ProfileScreen(navController: NavHostController) {
 
     Column(
         modifier = Modifier

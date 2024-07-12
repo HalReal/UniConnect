@@ -1,5 +1,4 @@
 package com.example.appointmentsappuam.ui.main
-
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -44,8 +43,26 @@ fun MainScreen(navController: NavHostController) {
                 ))
                 },
                 navigationIcon = {
-                    IconButton(onClick = { showMenu = true }) {
-                        Icon(Icons.Default.Menu, contentDescription = "Menu")
+                    Box {
+                        IconButton(onClick = { showMenu = true }) {
+                            Icon(Icons.Default.Menu, contentDescription = "Menu")
+                        }
+                        DropdownMenu(
+                            expanded = showMenu,
+                            onDismissRequest = { showMenu = false }
+                        ) {
+                            DropdownMenuItem(
+                                text = { Text(text = "Mi Perfil") },
+                                onClick = {navController.navigate("splash")})
+
+                            DropdownMenuItem(
+                                text = { Text(text = "Agendar cita") },
+                                onClick = { /* Handle option 2 */ })
+
+                            DropdownMenuItem(
+                                text = { Text(text = "Lista de docentes") },
+                                onClick = { /* Handle option 3 */ })
+                        }
                     }
                 },
                 actions = {
@@ -81,24 +98,6 @@ fun MainScreen(navController: NavHostController) {
             }
         }
     )
-
-    DropdownMenu(
-        expanded = showMenu,
-        onDismissRequest = { showMenu = false }
-    ) {
-        DropdownMenuItem(
-            text = { Text(text = "Mi Perfil") },
-            onClick = { /* Handle option 1 */ })
-
-        DropdownMenuItem(
-            text = { Text(text = "Agendar cita") },
-            onClick = { /* Handle option 1 */ })
-
-        DropdownMenuItem(
-            text = { Text(text = "Lista de docentes") },
-            onClick = { /* Handle option 1 */ })
-
-    }
 
     if (showDialog) {
         Dialog(
