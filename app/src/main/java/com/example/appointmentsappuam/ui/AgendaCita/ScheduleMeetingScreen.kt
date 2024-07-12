@@ -7,6 +7,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,6 +45,9 @@ fun ScheduleMeetingScreen(navController: NavHostController) {
             .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(text = "Agendar una cita", fontSize = 25.sp)
+
         OutlinedTextField(
             value = professorName,
             onValueChange = { professorName = it },
@@ -52,21 +56,35 @@ fun ScheduleMeetingScreen(navController: NavHostController) {
             modifier = Modifier.fillMaxWidth()
         )
         Column {
-            Row {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Checkbox(
                     checked = isOnline,
                     onCheckedChange = {
                         isOnline = true
-                    }
+                    },
+                    colors = CheckboxDefaults.colors(
+                        checkedColor = Color(0xFF009688),
+                        uncheckedColor = Color.Gray,
+                        checkmarkColor = Color.White
+                    )
                 )
                 Text("Online")
             }
-            Row {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Checkbox(
                     checked = !isOnline,
                     onCheckedChange = {
                         isOnline = false
-                    }
+                    },
+                    colors = CheckboxDefaults.colors(
+                        checkedColor = Color(0xFF009688),
+                        uncheckedColor = Color.Gray,
+                        checkmarkColor = Color.White
+                    )
                 )
                 Text("Presencial")
             }
@@ -84,23 +102,25 @@ fun ScheduleMeetingScreen(navController: NavHostController) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text("Hora", fontSize = 20.sp)
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(25.dp))
             OutlinedTextField(
                 value = hour,
                 onValueChange = { hour = it },
                 label = { Text("00") },
                 shape = RoundedCornerShape(10.dp),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                modifier = Modifier.width(56.dp)
+                modifier = Modifier.width(64.dp)
             )
-            Text(":")
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(":", fontSize = 24.sp)
+            Spacer(modifier = Modifier.width(8.dp))
             OutlinedTextField(
                 value = minute,
                 onValueChange = { minute = it },
                 label = { Text("00") },
                 shape = RoundedCornerShape(10.dp),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                modifier = Modifier.width(56.dp)
+                modifier = Modifier.width(64.dp)
             )
         }
         Row(
@@ -116,7 +136,9 @@ fun ScheduleMeetingScreen(navController: NavHostController) {
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.width(64.dp)
             )
+            Spacer(modifier = Modifier.width(8.dp))
             Text("/")
+            Spacer(modifier = Modifier.width(8.dp))
             OutlinedTextField(
                 value = month,
                 onValueChange = { month = it },
@@ -125,7 +147,9 @@ fun ScheduleMeetingScreen(navController: NavHostController) {
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.width(64.dp)
             )
+            Spacer(modifier = Modifier.width(8.dp))
             Text("/")
+            Spacer(modifier = Modifier.width(8.dp))
             OutlinedTextField(
                 value = year,
                 onValueChange = { year = it },
@@ -145,7 +169,8 @@ fun ScheduleMeetingScreen(navController: NavHostController) {
         Button(
             onClick = { /* Acción para enviar la propuesta */ },
             enabled = isFormValid,
-            modifier = Modifier.align(Alignment.End)
+            modifier = Modifier.align(Alignment.End),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF009688))
         ) {
             Text("Enviar propuesta")
         }
