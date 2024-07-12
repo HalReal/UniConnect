@@ -4,7 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,21 +18,19 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.ui.text.TextStyle
 import androidx.navigation.NavHostController
 
-
 @Composable
 fun ProfileScreen(navController: NavHostController) {
-
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Color(0xFFEFEFEF)
-            )
-
+            .background(Color(0xFFEFEFEF))
     ) {
-        TopBar()
-        Column(modifier = Modifier.fillMaxWidth().
-        background(Color(0xFF203D3F)).padding(12.dp)) {
+        TopBar(navController)
+        Column(
+            modifier = Modifier.fillMaxWidth()
+                .background(Color(0xFF203D3F))
+                .padding(12.dp)
+        ) {
             BasicText(
                 text = "Perfil",
                 style = TextStyle(
@@ -89,13 +87,15 @@ fun ProfileScreen(navController: NavHostController) {
 }
 
 @Composable
-fun TopBar() {
+fun TopBar(navController: NavHostController) {
+    var expanded by remember { mutableStateOf(false) }
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(138.dp)
             .background(Color(0xFF256767))
-            .padding(16.dp),
+            .padding(16.dp)
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -106,15 +106,43 @@ fun TopBar() {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Top
             ) {
-                IconButton(onClick = { /* Acción del botón de menú */ }) {
+                IconButton(onClick = { expanded = true }) {
                     Icon(
                         imageVector = Icons.Default.Menu,
                         contentDescription = "Menu",
                         tint = Color.White
                     )
                 }
-            }
 
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    DropdownMenuItem(
+                        text = { Text(text = "Mi Perfil") },
+                        onClick = {
+                            navController.navigate("ProfileStudent")
+                            expanded = false
+                        }
+                    )
+
+                    DropdownMenuItem(
+                        text = { Text(text = "Agendar cita") },
+                        onClick = {
+                            navController.navigate("Meeting")
+                            expanded = false
+                        }
+                    )
+
+                    DropdownMenuItem(
+                        text = { Text(text = "Lista de docentes") },
+                        onClick = {
+                            navController.navigate("ListadoProf")
+                            expanded = false
+                        }
+                    )
+                }
+            }
         }
     }
 }
@@ -133,7 +161,7 @@ fun ProfileHeader() {
         Column {
             BasicText(
                 text = "Edmundo Gabriel Martinez De Valle",
-                style = androidx.compose.ui.text.TextStyle(
+                style = TextStyle(
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 )
@@ -152,7 +180,7 @@ fun ProfileImage() {
     ) {
         BasicText(
             text = "EM",
-            style = androidx.compose.ui.text.TextStyle(
+            style = TextStyle(
                 color = Color.White,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold
@@ -173,7 +201,7 @@ fun CareerCard(career: String) {
     ) {
         BasicText(
             text = career,
-            style = androidx.compose.ui.text.TextStyle(
+            style = TextStyle(
                 fontSize = 16.sp
             )
         )
@@ -193,7 +221,7 @@ fun SubjectCard(subject: String) {
         BasicText(
             modifier = Modifier.fillMaxWidth(),
             text = subject,
-            style = androidx.compose.ui.text.TextStyle(
+            style = TextStyle(
                 fontSize = 16.sp
             )
         )

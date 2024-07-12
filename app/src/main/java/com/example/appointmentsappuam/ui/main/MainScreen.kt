@@ -53,15 +53,15 @@ fun MainScreen(navController: NavHostController) {
                         ) {
                             DropdownMenuItem(
                                 text = { Text(text = "Mi Perfil") },
-                                onClick = {navController.navigate("splash")})
+                                onClick = {navController.navigate("ProfileStudent")})
 
                             DropdownMenuItem(
                                 text = { Text(text = "Agendar cita") },
-                                onClick = { /* Handle option 2 */ })
+                                onClick = {navController.navigate("Meeting")})
 
                             DropdownMenuItem(
                                 text = { Text(text = "Lista de docentes") },
-                                onClick = { /* Handle option 3 */ })
+                                onClick = {navController.navigate("ListadoProf")})
                         }
                     }
                 },

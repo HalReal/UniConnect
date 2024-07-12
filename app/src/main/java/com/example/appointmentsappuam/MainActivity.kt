@@ -19,6 +19,8 @@ import com.example.appointmentsappuam.ui.AgendaCita.ScheduleMeetingScreen
 import com.example.appointmentsappuam.ui.theme.AppointmentsAppUAMTheme
 import com.example.appointmentsappuam.ui.TeacherProfile.UserProfileScreen
 import com.example.appointmentsappuam.ui.profile.ProfileScreen
+import com.example.appointmentsappuam.ui.ListadoProf.ProfessorListScreen
+
 
 
 class MainActivity : ComponentActivity() {
@@ -46,6 +48,7 @@ fun AppNavigation() {
         composable("Meeting") { ScheduleMeetingScreen(navController) }
         composable("ProfileTeacher") { UserProfileScreen(navController) }
         composable("ProfileStudent") { ProfileScreen(navController) }
+        composable("ListadoProf") { ProfessorListScreen(navController) }
 
     }
 }
