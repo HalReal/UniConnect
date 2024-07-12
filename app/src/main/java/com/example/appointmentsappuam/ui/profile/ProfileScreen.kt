@@ -65,7 +65,7 @@ fun ProfileScreen(navController: NavHostController) {
                 SubjectCard("Análisis y Diseño Orientado a Objetos (Grupo 1)")
             }
             Button(
-                onClick = { /* Acción de cerrar sesión */ },
+                onClick = { navController.navigate("home") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)

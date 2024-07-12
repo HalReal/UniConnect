@@ -30,20 +30,7 @@ import com.example.appointmentsappuam.ui.AgendaCita.ScheduleMeetingScreen
 import com.example.appointmentsappuam.ui.theme.AppointmentsAppUAMTheme
 import com.example.appointmentsappuam.viewmodel.LoginViewModel
 
-//class MainActivity : ComponentActivity() {
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
-//        setContent {
-//            AppointmentsAppUAMTheme {
-//                Surface(modifier = Modifier.fillMaxSize()) {
-//                    AppNavigation()
-//                }
-//            }
-//        }
-//    }
-//}
-//
+
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
