@@ -3,18 +3,23 @@ package com.example.appointmentsappuam.ui.AgendaCita
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Icon
 
-@Preview(showBackground = true)
 @Composable
-fun ScheduleMeetingScreen() {
+fun ScheduleMeetingScreen(navController: NavHostController) {
     var professorName by remember { mutableStateOf("") }
     var isOnline by remember { mutableStateOf(true) }
     var location by remember { mutableStateOf("") }
@@ -24,6 +29,8 @@ fun ScheduleMeetingScreen() {
     var month by remember { mutableStateOf("") }
     var year by remember { mutableStateOf("") }
     var reason by remember { mutableStateOf("") }
+
+    var showMenu by remember { mutableStateOf(false) }
 
     val isFormValid by remember {
         derivedStateOf {
@@ -43,6 +50,33 @@ fun ScheduleMeetingScreen() {
             .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        // Dropdown menu in the top right corner
+        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.TopEnd) {
+            IconButton(onClick = { showMenu = true }) {
+                Icon(Icons.Default.Menu, contentDescription = "Menu")
+            }
+            DropdownMenu(
+                expanded = showMenu,
+                onDismissRequest = { showMenu = false }
+            ) {
+                DropdownMenuItem(
+                    text = { Text(text = "Mi Perfil") },
+                    onClick = { navController.navigate("ProfileStudent") }
+                )
+                DropdownMenuItem(
+                    text = { Text(text = "Agendar cita") },
+                    onClick = { navController.navigate("Meeting") }
+                )
+                DropdownMenuItem(
+                    text = { Text(text = "Lista de docentes") },
+                    onClick = { navController.navigate("ListadoProf") }
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(text = "Agendar una cita", fontSize = 25.sp)
+
         OutlinedTextField(
             value = professorName,
             onValueChange = { professorName = it },
@@ -51,21 +85,35 @@ fun ScheduleMeetingScreen() {
             modifier = Modifier.fillMaxWidth()
         )
         Column {
-            Row {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Checkbox(
                     checked = isOnline,
                     onCheckedChange = {
                         isOnline = true
-                    }
+                    },
+                    colors = CheckboxDefaults.colors(
+                        checkedColor = Color(0xFF009688),
+                        uncheckedColor = Color.Gray,
+                        checkmarkColor = Color.White
+                    )
                 )
                 Text("Online")
             }
-            Row {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Checkbox(
                     checked = !isOnline,
                     onCheckedChange = {
                         isOnline = false
-                    }
+                    },
+                    colors = CheckboxDefaults.colors(
+                        checkedColor = Color(0xFF009688),
+                        uncheckedColor = Color.Gray,
+                        checkmarkColor = Color.White
+                    )
                 )
                 Text("Presencial")
             }
@@ -83,23 +131,25 @@ fun ScheduleMeetingScreen() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text("Hora", fontSize = 20.sp)
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(25.dp))
             OutlinedTextField(
                 value = hour,
                 onValueChange = { hour = it },
                 label = { Text("00") },
                 shape = RoundedCornerShape(10.dp),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                modifier = Modifier.width(56.dp)
+                modifier = Modifier.width(64.dp)
             )
-            Text(":")
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(":", fontSize = 24.sp)
+            Spacer(modifier = Modifier.width(8.dp))
             OutlinedTextField(
                 value = minute,
                 onValueChange = { minute = it },
                 label = { Text("00") },
                 shape = RoundedCornerShape(10.dp),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                modifier = Modifier.width(56.dp)
+                modifier = Modifier.width(64.dp)
             )
         }
         Row(
@@ -115,7 +165,9 @@ fun ScheduleMeetingScreen() {
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.width(64.dp)
             )
+            Spacer(modifier = Modifier.width(8.dp))
             Text("/")
+            Spacer(modifier = Modifier.width(8.dp))
             OutlinedTextField(
                 value = month,
                 onValueChange = { month = it },
@@ -124,7 +176,9 @@ fun ScheduleMeetingScreen() {
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.width(64.dp)
             )
+            Spacer(modifier = Modifier.width(8.dp))
             Text("/")
+            Spacer(modifier = Modifier.width(8.dp))
             OutlinedTextField(
                 value = year,
                 onValueChange = { year = it },
@@ -144,7 +198,8 @@ fun ScheduleMeetingScreen() {
         Button(
             onClick = { /* Acción para enviar la propuesta */ },
             enabled = isFormValid,
-            modifier = Modifier.align(Alignment.End)
+            modifier = Modifier.align(Alignment.End),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF009688))
         ) {
             Text("Enviar propuesta")
         }

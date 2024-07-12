@@ -1,10 +1,10 @@
-package com.example.appointmentsappuam.ui.profile
+package com.example.appointmentsappuam.ui.TeacherProfile
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,19 +18,21 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.ui.text.TextStyle
 import androidx.navigation.NavHostController
 
+
 @Composable
-fun ProfileScreen(navController: NavHostController) {
+fun UserProfileScreen(navController: NavHostController) {
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFEFEFEF))
+            .background(
+                Color(0xFFEFEFEF)
+            )
+
     ) {
-        TopBar(navController)
-        Column(
-            modifier = Modifier.fillMaxWidth()
-                .background(Color(0xFF203D3F))
-                .padding(12.dp)
-        ) {
+        TopBar()
+        Column(modifier = Modifier.fillMaxWidth().
+        background(Color(0xFF203D3F)).padding(12.dp)) {
             BasicText(
                 text = "Perfil",
                 style = TextStyle(
@@ -54,15 +56,15 @@ fun ProfileScreen(navController: NavHostController) {
                 Spacer(modifier = Modifier.height(32.dp))
                 ProfileHeader()
                 Spacer(modifier = Modifier.height(8.dp))
-                CareerCard("Ingeniería en Sistemas de Información")
+                CareerCard("Lista de Estudiantes")
                 Spacer(modifier = Modifier.height(40.dp))
-                SubjectCard("Física Aplicada (Grupo 1)")
+                SubjectCard("EDMUNDO GABRIEL MARTINEZ DE VALLE")
                 Spacer(modifier = Modifier.height(8.dp))
-                SubjectCard("Administración y Gestión de Base de Datos (Grupo 2)")
+                SubjectCard("ANTHONY NOEL MORALES MORALES")
                 Spacer(modifier = Modifier.height(8.dp))
-                SubjectCard("Programación Orientada a Objetos 2 (Grupo 2)")
+                SubjectCard("JEFFREY NOEL ORDOÑEZ TINOCO")
                 Spacer(modifier = Modifier.height(8.dp))
-                SubjectCard("Análisis y Diseño Orientado a Objetos (Grupo 1)")
+                SubjectCard("SHEMELY YAHOSKA PEREZ ALVAREZ")
             }
             Button(
                 onClick = { /* Acción de cerrar sesión */ },
@@ -87,15 +89,13 @@ fun ProfileScreen(navController: NavHostController) {
 }
 
 @Composable
-fun TopBar(navController: NavHostController) {
-    var expanded by remember { mutableStateOf(false) }
-
+fun TopBar() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(138.dp)
             .background(Color(0xFF256767))
-            .padding(16.dp)
+            .padding(16.dp),
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -106,43 +106,15 @@ fun TopBar(navController: NavHostController) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Top
             ) {
-                IconButton(onClick = { expanded = true }) {
+                IconButton(onClick = { /* Acción del botón de menú */ }) {
                     Icon(
                         imageVector = Icons.Default.Menu,
                         contentDescription = "Menu",
                         tint = Color.White
                     )
                 }
-
-                DropdownMenu(
-                    expanded = expanded,
-                    onDismissRequest = { expanded = false }
-                ) {
-                    DropdownMenuItem(
-                        text = { Text(text = "Mi Perfil") },
-                        onClick = {
-                            navController.navigate("ProfileStudent")
-                            expanded = false
-                        }
-                    )
-
-                    DropdownMenuItem(
-                        text = { Text(text = "Agendar cita") },
-                        onClick = {
-                            navController.navigate("Meeting")
-                            expanded = false
-                        }
-                    )
-
-                    DropdownMenuItem(
-                        text = { Text(text = "Lista de docentes") },
-                        onClick = {
-                            navController.navigate("ListadoProf")
-                            expanded = false
-                        }
-                    )
-                }
             }
+
         }
     }
 }
@@ -160,8 +132,8 @@ fun ProfileHeader() {
         Spacer(modifier = Modifier.width(16.dp))
         Column {
             BasicText(
-                text = "Edmundo Gabriel Martinez De Valle",
-                style = TextStyle(
+                text = "NORMAN JOSE CASH ARCIA",
+                style = androidx.compose.ui.text.TextStyle(
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 )
@@ -180,7 +152,7 @@ fun ProfileImage() {
     ) {
         BasicText(
             text = "EM",
-            style = TextStyle(
+            style = androidx.compose.ui.text.TextStyle(
                 color = Color.White,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold
@@ -201,7 +173,7 @@ fun CareerCard(career: String) {
     ) {
         BasicText(
             text = career,
-            style = TextStyle(
+            style = androidx.compose.ui.text.TextStyle(
                 fontSize = 16.sp
             )
         )
@@ -221,7 +193,7 @@ fun SubjectCard(subject: String) {
         BasicText(
             modifier = Modifier.fillMaxWidth(),
             text = subject,
-            style = TextStyle(
+            style = androidx.compose.ui.text.TextStyle(
                 fontSize = 16.sp
             )
         )
