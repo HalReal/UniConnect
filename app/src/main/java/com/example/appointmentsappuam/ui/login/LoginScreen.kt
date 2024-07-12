@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -25,24 +26,19 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.appointmentsappuam.R
 
-
+//ip del cmd 192.168.47.1
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = true)
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavHostController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-//            .background(
-//                brush = Brush.verticalGradient(
-//                    colors = listOf(Color(0xFF007469), Color.White)
-//                )
-//            )
             .padding(16.dp)
     ) {
         Column(
@@ -71,9 +67,11 @@ fun LoginScreen() {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Text("Ingrese sus credenciales", color = Color.Black, fontFamily = FontFamily(
-                Font(R.font.neuehassdisplay_light)
-            ), fontSize = 18.sp)
+            Text(
+                "Ingrese sus credenciales", color = Color.Black, fontFamily = FontFamily(
+                    Font(R.font.neuehassdisplay_light)
+                ), fontSize = 18.sp
+            )
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -121,11 +119,15 @@ fun LoginScreen() {
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
-                onClick = { /* Handle login */ },
+                onClick = {navController.navigate("splash")},
                 modifier = Modifier.fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF009688))
+                colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.aqua))
             ) {
-                Text("Acceder", color = Color.White)
+                Text(
+                    "Acceder", color = Color.White, fontFamily = FontFamily(
+                        Font(R.font.arial)
+                    )
+                )
             }
 
             Spacer(modifier = Modifier.height(8.dp))

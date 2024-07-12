@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,19 +15,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.appointmentsappuam.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun SplashScreen(onTimeout: () -> Unit) {
-    val scope = rememberCoroutineScope()
+fun SplashScreen(navController: NavHostController, onTimeout: () -> Unit) {
 
     // Simulate loading with a delay
-//    scope.launch {
-//        delay(3000)
-//        onTimeout()
-//    }
+    LaunchedEffect(Unit) {
+        delay(2500)
+        onTimeout()
+    }
 
     Box(
         modifier = Modifier
@@ -59,10 +60,4 @@ fun SplashScreen(onTimeout: () -> Unit) {
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun SplashScreenPreview() {
-    SplashScreen(onTimeout = {})
 }
