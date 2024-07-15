@@ -196,7 +196,7 @@ fun ScheduleMeetingScreen(navController: NavHostController) {
             modifier = Modifier.fillMaxWidth()
         )
         Button(
-            onClick = { /* Acción para enviar la propuesta */ },
+            onClick = { navController.navigate("main") },
             enabled = isFormValid,
             modifier = Modifier.align(Alignment.End),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF009688))

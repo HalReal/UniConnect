@@ -15,6 +15,10 @@ import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.TextStyle
 import androidx.navigation.NavHostController
 
@@ -30,7 +34,7 @@ fun UserProfileScreen(navController: NavHostController) {
             )
 
     ) {
-        TopBar()
+        TopBar(navController)
         Column(modifier = Modifier.fillMaxWidth().
         background(Color(0xFF203D3F)).padding(12.dp)) {
             BasicText(
@@ -67,7 +71,7 @@ fun UserProfileScreen(navController: NavHostController) {
                 SubjectCard("SHEMELY YAHOSKA PEREZ ALVAREZ")
             }
             Button(
-                onClick = { /* Acción de cerrar sesión */ },
+                onClick = { navController.navigate("home") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)
@@ -89,7 +93,8 @@ fun UserProfileScreen(navController: NavHostController) {
 }
 
 @Composable
-fun TopBar() {
+fun TopBar(navController: NavHostController) {
+    var expanded by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -106,11 +111,40 @@ fun TopBar() {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Top
             ) {
-                IconButton(onClick = { /* Acción del botón de menú */ }) {
+                IconButton(onClick = { expanded = true }) {
                     Icon(
                         imageVector = Icons.Default.Menu,
                         contentDescription = "Menu",
                         tint = Color.White
+                    )
+                }
+
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    DropdownMenuItem(
+                        text = { Text(text = "Mi Perfil") },
+                        onClick = {
+                            navController.navigate("ProfileStudent")
+                            expanded = false
+                        }
+                    )
+
+                    DropdownMenuItem(
+                        text = { Text(text = "Agendar cita") },
+                        onClick = {
+                            navController.navigate("Meeting")
+                            expanded = false
+                        }
+                    )
+
+                    DropdownMenuItem(
+                        text = { Text(text = "Lista de docentes") },
+                        onClick = {
+                            navController.navigate("ListadoProf")
+                            expanded = false
+                        }
                     )
                 }
             }
